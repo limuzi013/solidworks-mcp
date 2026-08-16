@@ -1,0 +1,60 @@
+name: Publish to PyPI and the MCP Registry
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      # PyPI trusted publishing and the MCP Registry's github-oidc login both
+      # mint short-lived credentials from this token, so neither needs a stored
+      # secret in the repository.
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Check the tag matches the packaged versions
+        # A tag disagreeing with either file would put a release on PyPI that
+        # the registry entry does not point at. Fail before publishing anything,
+        # because neither publish can be taken back.
+        run: |
+          TAG=${GITHUB_REF#refs/tags/v}
+          PKG=$(python -c "import tomllib,pathlib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          SRV=$(python -c "import json,pathlib; print(json.loads(pathlib.Path('server.json').read_text())['version'])")
+          PKGVER=$(python -c "import json,pathlib; print(json.loads(pathlib.Path('server.json').read_text())['packages'][0]['version'])")
+          echo "tag=$TAG pyproject=$PKG server.json=$SRV packages[0]=$PKGVER"
+          test "$TAG" = "$PKG" && test "$TAG" = "$SRV" && test "$TAG" = "$PKGVER"
+
+      - name: Check the registry ownership marker is present
+        # The registry verifies a PyPI package by looking for this line in the
+        # README it publishes as the package description.
+        run: |
+          grep -q "mcp-name: io.github.limuzi013/solidworks-direct" README.md
+
+      - name: Build the distributions
+        # The wheel is pure Python, so building needs only the build backend and
+        # not the Windows-only runtime dependencies. A Linux runner is fine.
+        run: |
+          python -m pip install build
+          python -m build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Authenticate to the MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish to the MCP Registry
+        run: ./mcp-publisher publish

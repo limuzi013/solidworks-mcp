@@ -5,6 +5,25 @@ publishes in order: the package to PyPI first, then the registry entry that
 points at it. The registry validates the PyPI package before accepting the
 entry, so the order is not optional.
 
+## The short version: push a tag
+
+`.github/workflows/publish-mcp.yml` does the whole sequence on a `v*` tag —
+version consistency check, ownership-marker check, build, PyPI, then the
+registry — authenticating both publishes over OIDC, so no token is stored in
+the repository.
+
+**One-time setup on PyPI, before the first tag.** Under the project's
+Publishing settings add a *pending publisher* for GitHub with owner
+`limuzi013`, repository `solidworks-direct`, and workflow `publish-mcp.yml`.
+Without it the PyPI step fails to authenticate.
+
+```bash
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+The rest of this file is what that workflow automates, and what to do by hand if
+it is not usable.
+
 ## 1. Bump the version in all three places
 
 A release fails validation if these disagree:
