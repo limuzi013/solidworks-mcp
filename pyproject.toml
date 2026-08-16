@@ -25,7 +25,10 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "mcp>=1.29",
+    # Capped below 2.0: that release drops the low-level Server.list_tools() /
+    # call_tool() decorator API this server is built on, and renames Tool's
+    # inputSchema field. Porting to it is a separate piece of work.
+    "mcp>=1.29,<2",
     "pywin32>=306",
     "pillow>=10",
 ]

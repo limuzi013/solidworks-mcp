@@ -58,6 +58,19 @@ silently lies to a model:
 - **Never open a modal dialog.** One modal box blocks the COM call that opened
   it and deadlocks the whole server.
 
+## Why `mcp` is capped below 2.0
+
+`mcp` 2.0 removed the low-level `Server.list_tools()` / `Server.call_tool()`
+decorator API this server is built on, and renamed `Tool.inputSchema` to
+`input_schema` (keeping the old name only as a serialisation alias). Importing
+`solidworks_direct.server` against 2.0 raises
+`AttributeError: 'Server' object has no attribute 'list_tools'`, so the
+dependency is pinned `<2` until someone ports it.
+
+CI imports the server module as its own step for this reason. The unit tests
+only reach `sw_core`, so they stayed green while the entry point was broken —
+which is how this was missed the first time.
+
 ## Scope
 
 This server attaches to a session the user already has open and calls the
