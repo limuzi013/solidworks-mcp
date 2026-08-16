@@ -1,10 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.limuzi013/solidworks-direct",
+  "name": "io.github.limuzi013/solidworks-mcp",
   "title": "SOLIDWORKS Direct",
   "description": "Drives a running SOLIDWORKS session over its COM API: sketches, features, assemblies, drawings",
   "repository": {
-    "url": "https://github.com/limuzi013/solidworks-direct",
+    "url": "https://github.com/limuzi013/solidworks-mcp",
     "source": "github"
   },
   "version": "0.1.0",
@@ -12,7 +12,7 @@
     {
       "registryType": "pypi",
       "registryBaseUrl": "https://pypi.org",
-      "identifier": "solidworks-direct",
+      "identifier": "solidworks-mcp",
       "version": "0.1.0",
       "runtimeHint": "uvx",
       "transport": {

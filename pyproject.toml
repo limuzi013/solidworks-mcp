@@ -3,7 +3,7 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "solidworks-direct"
+name = "solidworks-mcp"
 version = "0.1.0"
 description = "MCP server that drives a running SOLIDWORKS session over its COM API"
 readme = "README.md"
@@ -34,11 +34,11 @@ dependencies = [
 ]
 
 [project.scripts]
-solidworks-direct = "solidworks_direct.server:run"
+solidworks-mcp = "solidworks_mcp.server:run"
 
 [project.urls]
-Homepage = "https://github.com/limuzi013/solidworks-direct"
-Issues = "https://github.com/limuzi013/solidworks-direct/issues"
+Homepage = "https://github.com/limuzi013/solidworks-mcp"
+Issues = "https://github.com/limuzi013/solidworks-mcp/issues"
 
 [tool.setuptools]
-packages = ["solidworks_direct"]
+packages = ["solidworks_mcp"]

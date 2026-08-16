@@ -63,7 +63,7 @@ silently lies to a model:
 `mcp` 2.0 removed the low-level `Server.list_tools()` / `Server.call_tool()`
 decorator API this server is built on, and renamed `Tool.inputSchema` to
 `input_schema` (keeping the old name only as a serialisation alias). Importing
-`solidworks_direct.server` against 2.0 raises
+`solidworks_mcp.server` against 2.0 raises
 `AttributeError: 'Server' object has no attribute 'list_tools'`, so the
 dependency is pinned `<2` until someone ports it.
 

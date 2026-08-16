@@ -1,4 +1,4 @@
-# solidworks-direct
+# solidworks-mcp
 
 An MCP server that drives a **running** SOLIDWORKS session over its COM API.
 
@@ -11,10 +11,10 @@ features you actually reach for, reference geometry, assemblies and mates, and �
 importantly — a feedback channel, including screenshots returned as images so
 the model can see what it just built.
 
-A sibling server, [`autocad-direct`](https://github.com/limuzi013/autocad-direct),
+A sibling server, [`autocad-mcp`](https://github.com/limuzi013/autocad-mcp),
 does the same for AutoCAD.
 
-<!-- mcp-name: io.github.limuzi013/solidworks-direct -->
+<!-- mcp-name: io.github.limuzi013/solidworks-mcp -->
 
 ---
 
@@ -26,17 +26,17 @@ does the same for AutoCAD.
 ## Install
 
 ```powershell
-git clone https://github.com/limuzi013/solidworks-direct.git
-cd solidworks-direct
+git clone https://github.com/limuzi013/solidworks-mcp.git
+cd solidworks-mcp
 py -3 -m venv .venv
 .venv\Scripts\python.exe -m pip install .
 ```
 
-That puts a `solidworks-direct` command in the environment, which is what the MCP
+That puts a `solidworks-mcp` command in the environment, which is what the MCP
 host runs. `uv` works too, if you prefer it:
 
 ```powershell
-uv tool install --from git+https://github.com/limuzi013/solidworks-direct solidworks-direct
+uv tool install --from git+https://github.com/limuzi013/solidworks-mcp solidworks-mcp
 ```
 
 ### Claude Code / Claude Desktop
@@ -44,8 +44,8 @@ uv tool install --from git+https://github.com/limuzi013/solidworks-direct solidw
 ```json
 {
   "mcpServers": {
-    "solidworks-direct": {
-      "command": "C:\\path\\to\\.venv\\Scripts\\solidworks-direct.exe"
+    "solidworks-mcp": {
+      "command": "C:\\path\\to\\.venv\\Scripts\\solidworks-mcp.exe"
     }
   }
 }
@@ -54,8 +54,8 @@ uv tool install --from git+https://github.com/limuzi013/solidworks-direct solidw
 ### Codex CLI (`~/.codex/config.toml`)
 
 ```toml
-[mcp_servers.solidworks-direct]
-command = 'C:\path\to\.venv\Scripts\solidworks-direct.exe'
+[mcp_servers.solidworks-mcp]
+command = 'C:\path\to\.venv\Scripts\solidworks-mcp.exe'
 ```
 
 Use single-quoted TOML strings so backslashes survive. Restart the MCP host after
@@ -66,9 +66,9 @@ but the dependencies — `server.py` at the repository root exists for exactly
 that:
 
 ```toml
-[mcp_servers.solidworks-direct]
+[mcp_servers.solidworks-mcp]
 command = 'C:\path\to\.venv\Scripts\python.exe'
-args = ['C:\path\to\solidworks-direct\server.py']
+args = ['C:\path\to\solidworks-mcp\server.py']
 ```
 
 ## Configuration

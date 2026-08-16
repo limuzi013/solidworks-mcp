@@ -21,10 +21,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from solidworks_direct.sw_feature import boss_extrude, cut_extrude
-from solidworks_direct.sw_file import create_new_document
-from solidworks_direct.sw_inspect import get_mass_properties
-from solidworks_direct.sw_sketch import (
+from solidworks_mcp.sw_feature import boss_extrude, cut_extrude
+from solidworks_mcp.sw_file import create_new_document
+from solidworks_mcp.sw_inspect import get_mass_properties
+from solidworks_mcp.sw_sketch import (
     add_relation,
     close_sketch,
     create_sketch,

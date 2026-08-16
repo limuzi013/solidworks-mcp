@@ -47,7 +47,7 @@ from . import sw_drawing  # noqa: F401
 from . import sw_demo  # noqa: F401
 
 
-server = Server("solidworks-direct")
+server = Server("solidworks-mcp")
 
 # One SOLIDWORKS session, one COM apartment: serialise tool calls so a slow
 # rebuild cannot interleave with the next call's selection.
@@ -85,7 +85,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent | 
 
 
 async def main() -> None:
-    logger.info("solidworks-direct starting with %d tools", len(TOOLS))
+    logger.info("solidworks-mcp starting with %d tools", len(TOOLS))
     async with stdio_server() as (read_stream, write_stream):
         await server.run(read_stream, write_stream, server.create_initialization_options())
 

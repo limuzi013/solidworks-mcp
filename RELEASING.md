@@ -14,7 +14,7 @@ the repository.
 
 **One-time setup on PyPI, before the first tag.** Under the project's
 Publishing settings add a *pending publisher* for GitHub with owner
-`limuzi013`, repository `solidworks-direct`, and workflow `publish-mcp.yml`.
+`limuzi013`, repository `solidworks-mcp`, and workflow `publish-mcp.yml`.
 Without it the PyPI step fails to authenticate.
 
 ```bash
@@ -34,7 +34,7 @@ A release fails validation if these disagree:
 | `server.json` | `version` |
 | `server.json` | `packages[0].version` |
 
-`solidworks_direct/__init__.py` carries `__version__` for anyone reading it at
+`solidworks_mcp/__init__.py` carries `__version__` for anyone reading it at
 runtime; keep it in step too.
 
 ## 2. Check the ownership marker is intact
@@ -44,7 +44,7 @@ The registry verifies ownership of a PyPI package by looking for an
 `README.md` carries it as a comment:
 
 ```markdown
-<!-- mcp-name: io.github.limuzi013/solidworks-direct -->
+<!-- mcp-name: io.github.limuzi013/solidworks-mcp -->
 ```
 
 The name after `mcp-name:` **must** match `name` in `server.json`. Deleting that
@@ -84,7 +84,7 @@ $arch = if ([System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitec
 
 Authenticate and publish. GitHub authentication is a device-code flow, and the
 namespace it grants is `io.github.<your-username>/`, which is why the server is
-named `io.github.limuzi013/solidworks-direct`:
+named `io.github.limuzi013/solidworks-mcp`:
 
 ```powershell
 .\mcp-publisher.exe login github
@@ -97,21 +97,21 @@ named `io.github.limuzi013/solidworks-direct`:
 Verify:
 
 ```powershell
-curl "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.limuzi013/solidworks-direct"
+curl "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.limuzi013/solidworks-mcp"
 ```
 
 ## 6. Point the README at PyPI
 
-Until the package is on PyPI, `uvx solidworks-direct` does not resolve, so the
+Until the package is on PyPI, `uvx solidworks-mcp` does not resolve, so the
 README documents installing from a checkout instead. Once the first release is
 live, add the shorter form:
 
 ```json
 {
   "mcpServers": {
-    "solidworks-direct": {
+    "solidworks-mcp": {
       "command": "uvx",
-      "args": ["solidworks-direct"]
+      "args": ["solidworks-mcp"]
     }
   }
 }

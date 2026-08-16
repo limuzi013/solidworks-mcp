@@ -1,4 +1,4 @@
-"""Shared foundation for the solidworks-direct MCP bridge.
+"""Shared foundation for the solidworks-mcp MCP bridge.
 
 Everything that touches COM, converts units, walks the feature tree, or turns a
 declarative selection specification into a real SOLIDWORKS selection lives here.
@@ -36,7 +36,7 @@ logging.basicConfig(
         RotatingFileHandler(LOG_PATH, maxBytes=2_000_000, backupCount=3, encoding="utf-8"),
     ],
 )
-logger = logging.getLogger("solidworks-direct")
+logger = logging.getLogger("solidworks-mcp")
 
 
 # --------------------------------------------------------------------------

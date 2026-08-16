@@ -37,7 +37,7 @@ jobs:
         # The registry verifies a PyPI package by looking for this line in the
         # README it publishes as the package description.
         run: |
-          grep -q "mcp-name: io.github.limuzi013/solidworks-direct" README.md
+          grep -q "mcp-name: io.github.limuzi013/solidworks-mcp" README.md
 
       - name: Build the distributions
         # The wheel is pure Python, so building needs only the build backend and

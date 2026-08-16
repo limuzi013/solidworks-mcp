@@ -30,7 +30,7 @@ jobs:
         # The tests only reach sw_core, so nothing else here would notice an
         # incompatible mcp release breaking the server's own entry point --
         # which is exactly how mcp 2.0 slipped past a green build once.
-        run: python -c "from solidworks_direct import server; print(len(server.TOOLS), 'tools registered')"
+        run: python -c "from solidworks_mcp import server; print(len(server.TOOLS), 'tools registered')"
 
       - name: Run the offline tests
         # discover only picks up test*.py, so live_p0_regression.py -- which
