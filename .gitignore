@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+server.log
+*.egg-info/
+.vscode/
+.idea/
+HANDOFF.md
+STATUS.md
