@@ -18,7 +18,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     active_document,
     as_list,
     byref_long,
@@ -40,7 +40,7 @@ from sw_core import (
     value,
     nothing,
 )
-from sw_file import new_document
+from .sw_file import new_document
 
 
 # swDwgPaperSizes_e

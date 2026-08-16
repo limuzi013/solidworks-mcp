@@ -14,22 +14,29 @@ the model can see what it just built.
 A sibling server, [`autocad-direct`](https://github.com/limuzi013/autocad-direct),
 does the same for AutoCAD.
 
+<!-- mcp-name: io.github.limuzi013/solidworks-direct -->
+
 ---
 
 ## Requirements
 
 - Windows, with SOLIDWORKS installed and **already running**
 - Python 3.10+
-- `pip install -r requirements.txt` (`mcp`, `pywin32`, `pillow`)
 
 ## Install
 
-```bash
+```powershell
 git clone https://github.com/limuzi013/solidworks-direct.git
+cd solidworks-direct
+py -3 -m venv .venv
+.venv\Scripts\python.exe -m pip install .
 ```
 
-```bash
-python -m venv .venv && .venv\Scripts\pip install -r solidworks-direct\requirements.txt
+That puts a `solidworks-direct` command in the environment, which is what the MCP
+host runs. `uv` works too, if you prefer it:
+
+```powershell
+uv tool install --from git+https://github.com/limuzi013/solidworks-direct solidworks-direct
 ```
 
 ### Claude Code / Claude Desktop
@@ -38,8 +45,7 @@ python -m venv .venv && .venv\Scripts\pip install -r solidworks-direct\requireme
 {
   "mcpServers": {
     "solidworks-direct": {
-      "command": "C:\\path\\to\\.venv\\Scripts\\python.exe",
-      "args": ["C:\\path\\to\\solidworks-direct\\server.py"]
+      "command": "C:\\path\\to\\.venv\\Scripts\\solidworks-direct.exe"
     }
   }
 }
@@ -49,11 +55,21 @@ python -m venv .venv && .venv\Scripts\pip install -r solidworks-direct\requireme
 
 ```toml
 [mcp_servers.solidworks-direct]
+command = 'C:\path\to\.venv\Scripts\solidworks-direct.exe'
+```
+
+Use single-quoted TOML strings so backslashes survive. Restart the MCP host after
+editing its configuration.
+
+An MCP host can also be pointed straight at a checkout, with nothing installed
+but the dependencies — `server.py` at the repository root exists for exactly
+that:
+
+```toml
+[mcp_servers.solidworks-direct]
 command = 'C:\path\to\.venv\Scripts\python.exe'
 args = ['C:\path\to\solidworks-direct\server.py']
 ```
-
-Use single-quoted TOML strings so backslashes survive.
 
 ## Configuration
 

@@ -11,7 +11,7 @@ import math
 import os
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     active_document,
     clear_selection,
     document_info,
@@ -32,7 +32,7 @@ from sw_core import (
     tool,
     value,
 )
-from sw_file import new_document
+from .sw_file import new_document
 
 
 DEMO_ENABLED = os.environ.get("SW_MCP_DEMO_TOOLS", "").strip().lower() in {"1", "true", "yes", "on"}

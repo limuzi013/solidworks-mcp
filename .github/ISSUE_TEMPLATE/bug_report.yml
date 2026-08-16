@@ -1,0 +1,74 @@
+name: Bug report
+description: A tool did something other than what it reported
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Most failures here are SOLIDWORKS returning null rather than raising, so
+        the useful report is what the *model* ended up as, not just the error text.
+
+  - type: input
+    id: sw-version
+    attributes:
+      label: SOLIDWORKS version and UI language
+      placeholder: "2026 SP3.2, Simplified Chinese"
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "3.12.4"
+    validations:
+      required: true
+
+  - type: input
+    id: host
+    attributes:
+      label: MCP host
+      placeholder: "Claude Desktop / Claude Code / Codex CLI"
+    validations:
+      required: true
+
+  - type: textarea
+    id: call
+    attributes:
+      label: The tool call
+      description: Tool name and arguments, as JSON.
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: reply
+    attributes:
+      label: What the tool replied
+      render: json
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What the model actually looked like afterwards
+      description: >
+        Output from check_errors, list_faces / list_edges, get_mass_properties,
+        or a screenshot — whatever shows the discrepancy. A tool reporting
+        success proves nothing on its own.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: preconditions
+    attributes:
+      label: Preconditions
+      options:
+        - label: SOLIDWORKS was already running, with a document open
+          required: true
+        - label: No modal dialog was waiting behind the SOLIDWORKS window
+          required: true
+        - label: I re-listed faces/edges after the last geometry change, rather than reusing cached indices
+          required: false

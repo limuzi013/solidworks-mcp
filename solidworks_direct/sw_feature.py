@@ -11,7 +11,7 @@ from __future__ import annotations
 import math
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     active_document,
     apply_selection,
     CHAMFER_ANGLE_DISTANCE,

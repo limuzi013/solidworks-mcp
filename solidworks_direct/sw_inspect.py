@@ -13,7 +13,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     active_document,
     apply_selection,
     apply_transform,

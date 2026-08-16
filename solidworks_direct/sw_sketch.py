@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     active_document,
     sketch_point_objects,
     dispatch_array,

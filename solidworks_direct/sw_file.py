@@ -8,7 +8,7 @@ from typing import Any
 import pythoncom
 import win32com.client
 
-from sw_core import (
+from .sw_core import (
     as_list,
     active_document,
     byref_long,

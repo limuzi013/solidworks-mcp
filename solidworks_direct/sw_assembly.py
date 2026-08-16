@@ -9,7 +9,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     MATE_ALIGNMENTS,
     MATE_TYPES,
     SELECTION_SCHEMA,

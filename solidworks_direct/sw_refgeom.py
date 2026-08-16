@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from sw_core import (
+from .sw_core import (
     select_in_order,
     active_document,
     clear_selection,

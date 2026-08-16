@@ -1,0 +1,43 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.limuzi013/solidworks-direct",
+  "title": "SOLIDWORKS Direct",
+  "description": "Drives a running SOLIDWORKS session over its COM API: sketches, features, assemblies, drawings",
+  "repository": {
+    "url": "https://github.com/limuzi013/solidworks-direct",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "solidworks-direct",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "SW_MCP_OUTPUT_ROOT",
+          "description": "Every file the server writes stays under this directory; paths outside it are refused. Defaults to ~/Documents/solidworks-mcp.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "SW_MCP_TEMPLATE_DIR",
+          "description": "Where to look for .prtdot / .asmdot / .drwdot templates when SOLIDWORKS has no default configured. Auto-discovered when unset.",
+          "isRequired": false,
+          "isSecret": false
+        },
+        {
+          "name": "SW_MCP_DEMO_TOOLS",
+          "description": "Set to 1 to register the opt-in basketball demo tools. Off by default, because they measurably degrade tool selection.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}
